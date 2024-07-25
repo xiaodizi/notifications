@@ -6,20 +6,14 @@
 
 buildscript {
     ext {
-        opensearch_version = System.getProperty("opensearch.version", "3.0.0-SNAPSHOT")
+        opensearch_version = System.getProperty("ratudb.version", "2.2.2-SNAPSHOT")
         isSnapshot = "true" == System.getProperty("build.snapshot", "true")
         buildVersionQualifier = System.getProperty("build.version_qualifier", "")
-        // 3.0.0-SNAPSHOT -> 3.0.0.0-SNAPSHOT
-        version_tokens = opensearch_version.tokenize('-')
-        opensearch_build = version_tokens[0] + '.0'
+
+        version_tokens = opensearch_version
+        opensearch_build = version_tokens
         plugin_no_snapshot = opensearch_build
-        if (buildVersionQualifier) {
-            opensearch_build += "-${buildVersionQualifier}"
-        }
-        if (isSnapshot) {
-            opensearch_build += "-SNAPSHOT"
-        }
-        opensearch_no_snapshot = opensearch_version.replace("-SNAPSHOT","")
+        opensearch_no_snapshot = opensearch_version
         common_utils_version = System.getProperty("common_utils.version", opensearch_build)
         kotlin_version = System.getProperty("kotlin.version", "1.8.21")
         junit_version = System.getProperty("junit.version", "5.7.2")
@@ -31,11 +25,17 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+        maven {
+            url = 'https://packages.aliyun.com/641280a5b6809992bb8fed9a/maven/ratu-tech'
+            credentials {
+                username = '64127f26c1bbc60cefcefda3'
+                password = 'lI=us7iA96H9'
+            }
+        }
     }
 
     dependencies {
-        classpath "org.opensearch.gradle:build-tools:${opensearch_version}"
+        classpath "com.ratutech.ratudb:build-tools:${opensearch_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}"
         classpath "org.jetbrains.kotlin:kotlin-allopen:${kotlin_version}"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.23.0"
@@ -55,7 +55,13 @@ allprojects {
         mavenLocal()
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url "https://aws.oss.sonatype.org/content/repositories/snapshots" }
+        maven {
+            url = 'https://packages.aliyun.com/641280a5b6809992bb8fed9a/maven/ratu-tech'
+            credentials {
+                username = '64127f26c1bbc60cefcefda3'
+                password = 'lI=us7iA96H9'
+            }
+        }
     }
     group = "org.opensearch"
     plugins.withId('java') {

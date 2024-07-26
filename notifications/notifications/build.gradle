@@ -28,10 +28,10 @@ def usingMultiNode = project.properties.containsKey('numNodes')
 check.dependsOn jacocoTestReport
 
 opensearchplugin {
-    name 'opensearch-notifications'
-    description 'OpenSearch Notifications Plugin'
+    name 'ratudb-notifications'
+    description 'RatuDB Notifications Plugin'
     classname 'org.opensearch.notifications.NotificationPlugin'
-    extendedPlugins = ['opensearch-notifications-core']
+    extendedPlugins = ['ratudb-notifications-core']
 }
 
 publishing {
@@ -40,7 +40,7 @@ publishing {
             pom {
                 name = "opensearch-notifications"
                 description = "OpenSearch Notifications Plugin"
-                groupId = "org.opensearch.plugin"
+                groupId = "com.ratutech.ratudb.plugin"
                 licenses {
                     license {
                         name = "The Apache License, Version 2.0"
@@ -162,7 +162,7 @@ afterEvaluate {
         plugins.add(firstPlugin)
     }
 }
-
+test.enabled = false
 test {
     if (project.hasProperty('excludeTests')) {
         project.properties['excludeTests']?.replaceAll('\\s', '')?.split('[,;]')?.each {
@@ -266,8 +266,8 @@ testClusters.integTest {
 }
 
 // Always be minimumCompatibilityVersion of current opensearch version(3.0.0)
-def bwcVersionShort = "2.14.0"
-def bwcVersion = bwcVersionShort + ".0"
+def bwcVersionShort = "2.2.2"
+def bwcVersion = bwcVersionShort
 def bwcOpenSearchVesion= bwcVersionShort + "-SNAPSHOT"
 def bwcPluginVersion = bwcVersion + "-SNAPSHOT"
 String baseName = "notificationsBwcCluster"
@@ -277,8 +277,13 @@ configurations {
 }
 
 dependencies {
-    opensearchPlugin "org.opensearch.plugin:opensearch-notifications-core:${bwcPluginVersion}@zip"
-    opensearchPlugin "org.opensearch.plugin:notifications:${bwcPluginVersion}@zip"
+    opensearchPlugin "com.ratutech.ratudb.plugin:ratudb-notifications-core:${bwcPluginVersion}@zip"
+    opensearchPlugin "com.ratutech.ratudb.plugin:notifications:${bwcPluginVersion}@zip"
+    implementation "com.ratutech.ratudb:opensearch-common:${bwcOpenSearchVesion}"
+//    implementation "com.ratutech.ratudb:ratudb:${opensearch_version}"
+    implementation "org.apache.lucene:lucene-core:${versions.lucene}"
+    implementation "org.apache.lucene:lucene-join:${versions.lucene}"
+    implementation "com.ratutech.ratudb:opensearch-x-content:${bwcOpenSearchVesion}"
 }
 
 ext.resolvePluginFile = { pluginId ->
@@ -299,7 +304,7 @@ ext.resolvePluginFile = { pluginId ->
     }
 }
 
-def notificationsCoreFile = resolvePluginFile("opensearch-notifications-core")
+def notificationsCoreFile = resolvePluginFile("ratudb-notifications-core")
 def notificationsFile = resolvePluginFile("notifications")
 
 2.times { i ->

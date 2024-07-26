@@ -44,7 +44,7 @@ class NotificationsBackwardsCompatibilityIT : PluginRestTestCase() {
             val pluginNames = plugins.map { plugin -> plugin["name"] }.toSet()
             when (CLUSTER_TYPE) {
                 ClusterType.OLD -> {
-                    assertTrue(pluginNames.contains("opensearch-notifications-core"))
+                    assertTrue(pluginNames.contains("ratudb-notifications-core"))
                     assertTrue(pluginNames.contains("opensearch-notifications"))
                     createTestNotificationsConfig(configId)
                 }

@@ -135,7 +135,7 @@ compileKotlin { kotlinOptions.freeCompilerArgs = ['-Xjsr305=strict'] }
 
 dependencies {
     compileOnly "com.ratutech.ratudb:ratudb:${opensearch_version}"
-    implementation "com.ratutech.ratudb:opensearch-core:${opensearch_version}"
+    compileOnly "com.ratutech.ratudb:opensearch-core:${opensearch_version}"
     implementation "com.ratutech.ratudb:opensearch-common:${opensearch_version}"
     implementation "org.apache.lucene:lucene-core:${versions.lucene}"
     implementation "org.apache.lucene:lucene-test-framework:${versions.lucene}"

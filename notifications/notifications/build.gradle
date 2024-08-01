@@ -103,6 +103,7 @@ dependencies {
         exclude group: 'org.jetbrains', module: 'annotations' // resolve jarhell
     } // ${kotlin_version} does not work for coroutines
     implementation "com.ratutech.ratudb.common:common-utils:${common_utils_version}"
+    implementation "org.apache.lucene:lucene-codecs:${versions.lucene}"
     compileOnly "com.ratutech.ratudb:opensearch-core:${opensearch_version}"
     // TODO: change compile to implementation when the _local/stats API is supported
     compileOnly "org.json:json:20231013"

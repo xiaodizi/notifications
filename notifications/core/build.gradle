@@ -40,7 +40,7 @@ ext {
 }
 
 opensearchplugin {
-    name 'ratudb-notifications-core'
+    name 'notifications-core'
     description 'RatuDB Notifications Core Plugin'
     classname 'org.opensearch.notifications.core.NotificationCorePlugin'
 }
@@ -49,7 +49,7 @@ publishing {
     publications {
         pluginZip(MavenPublication) { publication ->
             pom {
-                name = "ratudb-notifications-core"
+                name = "notifications-core"
                 description = "RatuDB Notifications Core Plugin"
                 groupId = "com.ratutech.ratudb.plugin"
                 licenses {
@@ -61,7 +61,11 @@ publishing {
                 developers {
                     developer {
                         name = "notifications"
-                        url = "https://github.com/xiaodizi/notifications#"
+                        url = "https://github.com/opensearch-project/notifications#"
+                    }
+                    developer {
+                        name = "RatuDB"
+                        url = "https://github.com/Ratu-Tech/RatuDB"
                     }
                 }
             }

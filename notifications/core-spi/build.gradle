@@ -105,14 +105,14 @@ publishing {
             artifact javadocJar
 
             pom {
-                name = "OpenSearch Notifications SPI"
+                name = "RatuDB Notifications SPI"
                 packaging = "jar"
-                url = "https://github.com/opensearch-project/notifications"
-                description = "OpenSearch Notifications SPI"
+                url = "https://github.com/Ratu-Tech/RatuDB"
+                description = "RatuDB Notifications SPI"
                 scm {
-                    connection = "scm:git@github.com:opensearch-project/notifications.git"
-                    developerConnection = "scm:git@github.com:opensearch-project/notifications.git"
-                    url = "git@github.com:opensearch-project/notifications.git"
+                    connection = "scm:git@github.com:xiaodizi/notifications.git"
+                    developerConnection = "scm:git@github.com:xiaodizi/notifications.git"
+                    url = "git@github.com:xiaodizi/notifications.git"
                 }
                 licenses {
                     license {
@@ -125,6 +125,11 @@ publishing {
                         id = "amazonwebservices"
                         organization = "Amazon Web Services"
                         organizationUrl = "https://aws.amazon.com"
+                    }
+                    developer {
+                        id = "RatuDB"
+                        organization = "RatuTech"
+                        organizationUrl = "https://ratutech.com/"
                     }
                 }
             }
